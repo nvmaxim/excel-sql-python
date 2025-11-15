@@ -1,0 +1,5 @@
+https://chat.deepseek.com/share/6wc7uwv37m620n1h7u
+https://chat.deepseek.com/share/17eshdqd6bpg2usiyj
+
+(.*?);(.*?);(\d+);(\d+);(.*)
+"$1";"$2";$3;$4;"$5"
