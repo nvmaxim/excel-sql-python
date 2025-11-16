@@ -50,7 +50,7 @@ FROM (
 WHERE category = 'VIP'
 ORDER BY revenue DESC;
 
--- УПРАЖНЕНИЕ 3: "Консолидация данных" - ИСПРАВЛЕНО!
+-- УПРАЖНЕНИЕ 3: "Консолидация данных" 
 CREATE VIEW sales_q1 AS
 SELECT
     manager,
