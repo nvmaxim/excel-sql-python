@@ -3,6 +3,7 @@ import numpy as np
 from _001_main import df
 
 # УПРАЖНЕНИЕ 1: "Анализ эффективности менеджеров"
+print("УПРАЖНЕНИЕ 1")
 result = (
     df[df["department"].isin(["А", "Б"])]  # Сито: оставляем только А и Б
     .groupby("department")  # Коробки: группируем по отделам
@@ -14,6 +15,7 @@ result = (
 print(result)
 
 #  УПРАЖНЕНИЕ 2: "Классификация клиентов"
+print("УПРАЖНЕНИЕ 2")
 # Весы + Новая деталь: взвешиваем и наклеиваем категории
 df["category"] = np.where(
     df["revenue"] > 20000, "VIP", np.where(df["revenue"] >= 10000, "Standard", "Basic")
@@ -24,6 +26,7 @@ result = df[df["category"] == "VIP"].sort_values("revenue", ascending=False)
 print(result)
 
 # УПРАЖНЕНИЕ 3: "Консолидация данных"
+print("УПРАЖНЕНИЕ 3")
 # Для упражнения 3 - разделяем на периоды обучение
 sales_q1 = df[df["period"] == "Q1"][["manager", "revenue"]].reset_index(drop=True)
 sales_q2 = df[df["period"] == "Q2"][["manager", "revenue"]].reset_index(drop=True)
@@ -40,6 +43,7 @@ result = (
 print(result)
 
 # УПРАЖНЕНИЕ 4: "Очистка и трансформация"
+print("УПРАЖНЕНИЕ 4")
 # Сито + Ластик: фильтруем опыт ≥2 и отделы А/Б
 result = df[(df["experience"] >= 2) & (df["department"].isin(["А", "Б"]))].copy()
 
@@ -51,6 +55,7 @@ result = result.rename(columns={"revenue": "sales"})
 print(result)
 
 # УПРАЖНЕНИЕ 5: "Комплексный отчет"
+print("УПРАЖНЕНИЕ 5")
 # Коробки + Соковыжималка: группируем и агрегируем
 dept_report = (
     df.groupby("department")

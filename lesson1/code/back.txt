@@ -1,6 +1,10 @@
 https://chat.deepseek.com/share/6wc7uwv37m620n1h7u
 https://chat.deepseek.com/share/17eshdqd6bpg2usiyj
 
+https://chat.deepseek.com/share/2hi2yy9intzw8s8ood - про скобки
+
+https://chat.deepseek.com/share/sgrcqsiq8lwp6rhvi4 - про то как запоминать
+
 (.*?);(.*?);(\d+);(\d+);(.*)
 "$1";"$2";$3;$4;"$5"
 
