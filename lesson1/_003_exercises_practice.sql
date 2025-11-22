@@ -24,6 +24,7 @@ VALUES ('Иван', 'А', 15000, 2, 'Q1'),
 CREATE VIEW sales AS
 SELECT *
 FROM sales_data;
+
 --Упражнение 1
 
 
@@ -33,11 +34,19 @@ FROM (
     SELECT
         *,
         CASE
-            WHEN revenue > 20000 THEN 'vip'
-            WHEN revenue >= 10000 THEN 'standart'
-            ELSE 'basic'
+            WHEN revenue >= 20000 THEN 'VIP'
+            WHEN revenue >= 10000 THEN 'Standart'
+            ELSE 'Basic'
         END AS category
-    FROM sales
+    FROM sales_data
 ) AS classified
-WHERE category = 'vip'
+WHERE category = 'VIP'
 ORDER BY revenue DESC;
+
+--Упражнение 3
+
+
+--Упражнение 4
+
+
+--Упражнение 5
