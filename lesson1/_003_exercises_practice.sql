@@ -27,23 +27,39 @@ FROM sales_data;
 
 --Упражнение 1
 
-
 --Упражнение 2
-SELECT *
-FROM (
-    SELECT
-        *,
-        CASE
-            WHEN revenue >= 20000 THEN 'VIP'
-            WHEN revenue >= 10000 THEN 'Standart'
-            ELSE 'Basic'
-        END AS category
-    FROM sales_data
-) AS classified
-WHERE category = 'VIP'
-ORDER BY revenue DESC;
+
 
 --Упражнение 3
+CREATE VIEW sales_q1 AS
+SELECT
+    manager,
+    revenue
+FROM sales_data
+WHERE period = 'Q1';
+CREATE VIEW sales_q2 AS
+SELECT
+    manager,
+    revenue
+FROM sales_data
+WHERE period = 'Q2';
+
+SELECT
+    manager,
+    sum(revenue) AS total_revenue
+FROM (
+    SELECT
+        manager,
+        revenue
+    FROM sales_q1
+    UNION ALL
+    SELECT
+        manager,
+        revenue
+    FROM sales_q2
+) AS combined
+GROUP BY manager
+ORDER BY total_revenue DESC;
 
 
 --Упражнение 4
