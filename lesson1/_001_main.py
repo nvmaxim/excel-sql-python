@@ -24,7 +24,7 @@ from sqlalchemy import create_engine
 
 # Чтение данных из Excel файла
 df_csv = pd.read_csv(
-    r"C:\Users\m1z3r\OneDrive\Рабочий стол\учеба\анки\excel-sql-python\lesson1\data\sales_data.csv",
+    r"C:\Users\nvmaxim\Desktop\excel-sql-python\lesson1\data\sales_data.csv",
     sep=";",
 )
 df = df_csv

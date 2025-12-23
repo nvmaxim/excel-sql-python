@@ -35,13 +35,6 @@ FROM sales_data;
 
 
 --Упражнение 4
-SELECT
-    manager,
-    department,
-    revenue AS sales,
-    revenue * 0.10 AS bonus
-FROM sales_data
-WHERE experience >= 2 AND department IN ('А', 'Б')
-ORDER BY revenue DESC;
+
 
 --Упражнение 5
