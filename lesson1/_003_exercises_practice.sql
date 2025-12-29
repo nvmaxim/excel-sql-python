@@ -26,12 +26,44 @@ SELECT *
 FROM sales_data;
 
 --Упражнение 1
+SELECT
+    department,
+    avg(revenue) AS avg_revenue
+FROM sales_data
+WHERE department IN ('А', 'Б')
+GROUP BY department
+ORDER BY avg_revenue DESC;
 
 
 --Упражнение 2
 
 
 --Упражнение 3
+DROP VIEW IF EXISTS sales_q1;
+CREATE VIEW sales_q1 AS
+SELECT
+    manager,
+    revenue
+FROM sales_data
+WHERE period = 'Q1';
+DROP VIEW IF EXISTS sales_q2;
+CREATE VIEW sales_q2 AS
+SELECT
+    manager,
+    revenue
+FROM sales_data
+WHERE period = 'Q2';
+
+SELECT
+    manager,
+    sum(revenue) AS total_revenue
+FROM (
+    SELECT * FROM sales_q1
+    UNION ALL
+    SELECT * FROM sales_q2
+) AS combined
+GROUP BY manager
+ORDER BY total_revenue DESC;
 
 
 --Упражнение 4
