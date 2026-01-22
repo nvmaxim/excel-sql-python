@@ -26,3 +26,13 @@ SELECT *
 FROM sales_data;
 
 --Упражнение
+SELECT * FROM (SELECT
+    *,
+    CASE
+        WHEN revenue >= 18000 THEN 'VIP'
+        WHEN revenue >= 10000 THEN 'Standard'
+        ELSE 'Basic'
+    END AS category
+FROM sales_data) AS calssification
+WHERE category = 'VIP'
+ORDER BY revenue DESC;
