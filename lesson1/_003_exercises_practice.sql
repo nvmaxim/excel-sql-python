@@ -26,17 +26,11 @@ SELECT *
 FROM sales_data;
 
 --Упражнение
--- УПРАЖНЕНИЕ 5: "Комплексный отчет"
+-- УПРАЖНЕНИЕ 5: "Комплексный отчет" (SQL)
 SELECT
+    manager,
     department,
-    COUNT(manager) AS managers_count,
-    SUM(revenue) AS total_revenue,
-    SUM(revenue) * 1.0 / SUM(SUM(revenue)) OVER () AS revenue_share,
-    SUM(revenue) * 1.0 / COUNT(manager) AS avg_per_manager,
-    CASE
-        WHEN SUM(revenue) * 1.0 / COUNT(manager) > 18000 THEN 'Да'
-        ELSE 'Нет'
-    END AS high_performance
-FROM sales
-GROUP BY department
-ORDER BY total_revenue DESC;
+    revenue AS sales,
+    revenue * 0.10 AS bonus
+FROM sales_data
+WHERE experience >= 2 AND department IN ('А', 'Б');
