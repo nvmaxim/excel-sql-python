@@ -26,12 +26,18 @@ SELECT *
 FROM sales_data;
 
 --Упражнение
--- УПРАЖНЕНИЕ 2: "Классификация клиентов" (SQL)
--- Классифицируйте клиентов по уровню выручки на VIP, Standard и Basic. Найдите всех VIP-клиентов и отсортируйте их по убыванию выручки.
--- [...]
-SELECT * FROM (SELECT
-    *,
-    CASE WHEN revenue >= 20000 THEN 'VIP' WHEN revenue >= 10000 THEN 'Standart' ELSE 'Basic' END AS category
-FROM sales_data) AS classification
-WHERE category = 'VIP'
-ORDER BY revenue DESC;
+-- УПРАЖНЕНИЕ 5: "Комплексный отчет" (SQL)
+-- Создайте комплексный отчет по отделам: количество менеджеров, общая выручка, доля в общей выручке, средняя выручка на менеджера и флаг высокой эффективности.
+SELECT
+    department,
+    count(manager) AS manager_count,
+    sum(revenue) AS total_revenue,
+    sum(revenue) * 1.0 / sum(sum(revenue)) OVER () AS revenue_share,
+    sum(revenue) * 1.0 / count(manager) AS avg_per_manager,
+    CASE
+        WHEN sum(revenue) * 1.0 / count(manager) > 10000 THEN 'Yes'
+        ELSE 'No'
+    END AS high_perfomance_flag
+FROM sales_data
+GROUP BY department
+ORDER BY total_revenue;
