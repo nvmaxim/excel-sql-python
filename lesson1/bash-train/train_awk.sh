@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-echo "Hello from bash"
+sed 'pattern/d'
 
+delete from
 
-awk '{PRINT $1, 1+S2}'
+drop
