@@ -26,36 +26,14 @@ SELECT *
 FROM sales_data;
 
 --Упражнение
--- УПРАЖНЕНИЕ 3: "Консолидация данных" (SQL)
--- Объедините данные за Q1 и Q2, сгруппируйте по менеджерам и посчитайте общую выручку для каждого менеджера за оба периода.
+-- УПРАЖНЕНИЕ 2
+-- УПРАЖНЕНИЕ 2: "Классификация клиентов" (SQL)
+-- Классифицируйте клиентов по уровню выручки на VIP, Standard и Basic. Найдите всех VIP-клиентов и отсортируйте их по убыванию выручки
 
-DROP VIEW IF EXISTS sales_q1;
-CREATE VIEW sales_q1 AS
-SELECT
-    manager,
-    revenue,
-    period
-FROM sales_data
-WHERE period = 'Q1';
-
-DROP VIEW IF EXISTS sales_q2;
-CREATE VIEW sales_q2 AS
-SELECT
-    manager,
-    revenue,
-    period
-FROM sales_data
-WHERE period = 'Q2';
-
-SELECT sum(revenue) AS total_revenue
+SELECT *
 FROM (SELECT
-    manager,
-    revenue
-FROM sales_q1
-UNION ALL
-SELECT
-    manager,
-    revenue
-FROM sales_q2)
-GROUP BY manager
-ORDER BY total_revenue;
+    *,
+    CASE
+        WHEN revenue >= 20000 THEN 'VIP' WHEN revenue >= 10000 THEN 'Standart' ELSE 'Basic' END AS category FROM sales_data) AS classification
+WHERE category = 'VIP'
+ORDER BY revenue DECK;
