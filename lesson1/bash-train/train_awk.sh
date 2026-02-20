@@ -1,7 +1,4 @@
 #!/usr/bin/env bash
 
-sed 'pattern/d'
+sed 'pattert/d'
 
-delete from
-
-drop
