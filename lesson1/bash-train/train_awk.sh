@@ -1,4 +1,12 @@
 #!/usr/bin/env bash
 
-sed 'pattert/d'
+cat file1 file2
+
+union
+
+concat
+
+select a+b as s
+
+df[[]]
 
