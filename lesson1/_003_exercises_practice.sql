@@ -25,15 +25,16 @@ CREATE VIEW sales AS
 SELECT *
 FROM sales_data;
 
---Упражнение
--- УПРАЖНЕНИЕ 2
--- УПРАЖНЕНИЕ 2: "Классификация клиентов" (SQL)
--- Классифицируйте клиентов по уровню выручки на VIP, Standard и Basic. Найдите всех VIP-клиентов и отсортируйте их по убыванию выручки
+-- --Упражнение
+-- УПРАЖНЕНИЕ 4: "Очистка и трансформация" (SQL)
+-- Отфильтруйте менеджеров с опытом от 2 лет из отделов А и Б, добавьте колонку бонуса (10% от выручки) и переименуйте колонку revenue в sales.
 
-SELECT *
-FROM (SELECT
-    *,
-    CASE
-        WHEN revenue >= 20000 THEN 'VIP' WHEN revenue >= 10000 THEN 'Standart' ELSE 'Basic' END AS category FROM sales_data) AS classification
-WHERE category = 'VIP'
-ORDER BY revenue DECK;
+
+SELECT
+    manager,
+    experience,
+    revenue AS sales,
+    revenue * 0.10 AS bonus
+FROM sales_data
+WHERE experience >= 2 AND department IN ('А', 'Б')
+ORDER BY sales DESC;
