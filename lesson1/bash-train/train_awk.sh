@@ -2,8 +2,8 @@
 
 
 
-cut -d'' - f
-,
-select col
+cat file 1  file 2
 
-df[[jkh kjhkj]]
+union
+
+dpconcat
