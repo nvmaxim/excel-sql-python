@@ -25,16 +25,21 @@ CREATE VIEW sales AS
 SELECT *
 FROM sales_data;
 
--- --Упражнение
--- УПРАЖНЕНИЕ 4: "Очистка и трансформация" (SQL)
--- Отфильтруйте менеджеров с опытом от 2 лет из отделов А и Б, добавьте колонку бонуса (10% от выручки) и переименуйте колонку revenue в sales.
+-- УПРАЖНЕНИЕ 3: "Консолидация данных (python)
+-- Объедините данные за Q1 и Q2, сгруппируйте по менеджерам и посчитайте общую выручку для каждого менеджера за оба периода.
 
-
+DROP VIEW IF EXISTS period_q1;
+CREATE VIEW period_q1 AS
 SELECT
     manager,
-    experience,
-    revenue AS sales,
-    revenue * 0.10 AS bonus
+    revenue
 FROM sales_data
-WHERE experience >= 2 AND department IN ('А', 'Б')
-ORDER BY sales DESC;
+WHERE period = 'Q1';
+
+DROP VIEW IF EXISTS period_q2;
+CREATE VIEW period_q2 AS
+SELECT
+    manager,
+    revenue
+FROM sales_data
+WHERE period = 'Q2';
