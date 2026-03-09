@@ -25,21 +25,12 @@ CREATE VIEW sales AS
 SELECT *
 FROM sales_data;
 
--- УПРАЖНЕНИЕ 3: "Консолидация данных (python)
--- Объедините данные за Q1 и Q2, сгруппируйте по менеджерам и посчитайте общую выручку для каждого менеджера за оба периода.
-
-DROP VIEW IF EXISTS period_q1;
-CREATE VIEW period_q1 AS
+-- УПРАЖНЕНИЕ 1: "Анализ эффективности менеджеров (SQL)
+-- В каком отделе (А или Б) менеджеры в среднем приносят больше выручки?
 SELECT
-    manager,
-    revenue
+    department,
+    sum(revenue) AS total_revenue
 FROM sales_data
-WHERE period = 'Q1';
-
-DROP VIEW IF EXISTS period_q2;
-CREATE VIEW period_q2 AS
-SELECT
-    manager,
-    revenue
-FROM sales_data
-WHERE period = 'Q2';
+WHERE department IN ('А', 'Б')
+GROUP BY department
+ORDER BY total_revenue ASC;
