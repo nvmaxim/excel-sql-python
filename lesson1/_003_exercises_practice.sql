@@ -27,10 +27,15 @@ FROM sales_data;
 
 -- УПРАЖНЕНИЕ 1: "Анализ эффективности менеджеров (SQL)
 -- В каком отделе (А или Б) менеджеры в среднем приносят больше выручки?
-SELECT
-    department,
-    sum(revenue) AS total_revenue
-FROM sales_data
-WHERE department IN ('А', 'Б')
-GROUP BY department
-ORDER BY total_revenue ASC;
+SELECT *
+FROM (SELECT
+    *,
+    CASE
+        WHEN revenue >= 20000 THEN 'VIP' WHEN
+            revenue >= 10000
+            THEN 'Standard'
+        ELSE 'Basic'
+    END AS category
+FROM sales_data) AS calssification
+WHERE category = 'VIP'
+ORDER BY revenue DESC
