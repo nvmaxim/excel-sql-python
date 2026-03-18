@@ -25,17 +25,29 @@ CREATE VIEW sales AS
 SELECT *
 FROM sales_data;
 
--- УПРАЖНЕНИЕ 1: "Анализ эффективности менеджеров (SQL)
--- В каком отделе (А или Б) менеджеры в среднем приносят больше выручки?
-SELECT *
-FROM (SELECT
-    *,
-    CASE
-        WHEN revenue >= 20000 THEN 'VIP' WHEN
-            revenue >= 10000
-            THEN 'Standard'
-        ELSE 'Basic'
-    END AS category
-FROM sales_data) AS calssification
-WHERE category = 'VIP'
-ORDER BY revenue DESC
+-- УПРАЖНЕНИЕ 3: "Консолидация данных" (SQL)
+
+DROP VIEW IF EXISTS period_q1;
+CREATE VIEW period_q1 AS
+SELECT
+    manager,
+    revenue
+FROM sales_data
+WHERE period = 'Q1';
+DROP VIEW IF EXISTS period_q2;
+CREATE VIEW period_q2 AS
+SELECT
+    manager,
+    revenue
+FROM sales_data
+WHERE period = 'Q2';
+
+SELECT
+    manager,
+    sum(revenue) AS total_revenue
+FROM (
+    SELECT * FROM period_q1
+    UNION
+    SELECT * FROM period_q2
+) AS combined
+GROUP BY manager
