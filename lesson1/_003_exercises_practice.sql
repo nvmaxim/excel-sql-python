@@ -25,29 +25,19 @@ CREATE VIEW sales AS
 SELECT *
 FROM sales_data;
 
--- УПРАЖНЕНИЕ 3: "Консолидация данных" (SQL)
+-- УПРАЖНЕНИЕ 5: "Комплексный отчет" (SQL)
+-- Создайте комплексный отчет по отделам: количество менеджеров, общая выручка, доля в общей выручке, средняя выручка на менеджера и флаг высокой эффективности.
 
-DROP VIEW IF EXISTS period_q1;
-CREATE VIEW period_q1 AS
-SELECT
-    manager,
-    revenue
-FROM sales_data
-WHERE period = 'Q1';
-DROP VIEW IF EXISTS period_q2;
-CREATE VIEW period_q2 AS
-SELECT
-    manager,
-    revenue
-FROM sales_data
-WHERE period = 'Q2';
 
 SELECT
-    manager,
-    sum(revenue) AS total_revenue
-FROM (
-    SELECT * FROM period_q1
-    UNION
-    SELECT * FROM period_q2
-) AS combined
-GROUP BY manager
+    department,
+    count(manager) AS manager_count,
+    sum(revenue) AS total_revenue,
+    sum(revenue) * 1.0 / sum(sum(revenue)) OVER () AS revenue_share,
+    sum(revenue) * 1.0 / count(manager) AS avg_per_manager,
+    CASE
+        WHEN (sum(revenue) * 1.0 / count(manager)) > 18000 THEN 'Yes'
+        ELSE 'No'
+    END AS high_perfomance_flag
+FROM sales_data
+GROUP BY department
