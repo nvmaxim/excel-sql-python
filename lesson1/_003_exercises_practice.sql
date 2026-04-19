@@ -27,17 +27,3 @@ FROM sales_data;
 
 -- УПРАЖНЕНИЕ 2: "Классификация клиентов" (SQL)
 -- Классифицируйте клиентов по уровню выручки на VIP, Standard и Basic. Найдите всех VIP-клиентов и отсортируйте их по убыванию выручки.
-
-
-SELECT * FROM (
-    SELECT
-        *,
-        CASE
-            WHEN revenue > 18000 THEN 'VIP' WHEN
-                revenue > 10000
-                THEN 'Standart'
-            ELSE 'basic'
-        END AS category
-    FROM sales_data
-) AS classification
-WHERE category = 'VIP';
